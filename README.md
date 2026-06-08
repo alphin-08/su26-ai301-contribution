@@ -1,15 +1,15 @@
-# Contribution [#]: [Issue Title]
+# Contribution [1]: Docusaurus build server crashing due to strict MDX compilation errors in documentation files
 
-**Contribution Number:** [1 / 2 / 3]  
-**Student:** [Your Name]  
-**Issue:** [GitHub issue link]  
-**Status:** [Phase I / Phase II / Phase III / Phase IV] [In Progress / Complete]
+**Contribution Number:** 1  
+**Student:** Alphin Shajan  
+**Issue:** https://github.com/carlos-emr/carlos/issues/2734  
+**Status:** Phase I
 
 ---
 
 ## Why I Chose This Issue
 
-[1-2 paragraphs explaining why this issue interests you, how it matches your skills/learning goals, what you hope to learn]
+I picked this issue because clear documentation is important for any software project. I actually used Docusaurus in my senior year capstone course. During that project I set up an automatic pipeline that updated the test coverage report on our documentation website whenever we made new test cases. This issue fits my current skills perfectly. I need to update 24 old markdown files so they work with the new rules of Docusaurus. It is a straightforward task that will give me solid practice exploring a new codebase. I also want to learn how to fix server build crashes so I can understand how large projects are maintained.
 
 ---
 
