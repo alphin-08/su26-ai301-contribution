@@ -1,4 +1,4 @@
-# Contribution [1]: Docusaurus build server crashing due to strict MDX compilation errors in documentation files
+# Contribution [1]: Replace Flowsheet2Action direct-response return nulls with NONE
 
 **Contribution Number:** 1  
 **Student:** Alphin Shajan  
