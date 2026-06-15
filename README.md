@@ -2,14 +2,14 @@
 
 **Contribution Number:** 1  
 **Student:** Alphin Shajan  
-**Issue:** https://github.com/carlos-emr/carlos/issues/2734  
+**Issue:** https://github.com/carlos-emr/carlos/issues/2885 
 **Status:** Phase I
 
 ---
 
 ## Why I Chose This Issue
 
-I picked this issue because clear documentation is important for any software project. I actually used Docusaurus in my senior year capstone course. During that project I set up an automatic pipeline that updated the test coverage report on our documentation website whenever we made new test cases. This issue fits my current skills perfectly. I need to update 24 old markdown files so they work with the new rules of Docusaurus. It is a straightforward task that will give me solid practice exploring a new codebase. I also want to learn how to fix server build crashes so I can understand how large projects are maintained.
+I picked this issue because I get to work on the real backend code of a medical records system. My job is to check a specific Java file and make sure certain methods return the right value instead of returning null. This fits my skills perfectly since I already know Java. I can practice reading the code to find out which parts send data directly to the user. I also need to write some tests to prove my code changes actually work. This builds right on top of the testing skills I learned during my senior capstone project. Fixing this issue will help me prepare for my new engineering job. It will show me exactly how big teams keep their code organized and secure.
 
 ---
 
