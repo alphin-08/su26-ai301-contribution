@@ -17,19 +17,19 @@ I picked this issue because I get to work on the real backend code of a medical 
 
 ### Problem Description
 
-[In your own words, what's broken or missing?]
+The Flowsheet2Action class had methods that write JSON directly to the HTTP response and then ended with return null. The project guidelines in CLAUDE.md say that any action which writes directly to the response should end with return NONE instead. Using return null is not reliable enough to stop Struts from trying to resolve a result after the response is already written, which could cause an HTML error page to get mixed into a response that is supposed to be pure JSON.
 
 ### Expected Behavior
 
-[What should happen?]
+Every method in Flowsheet2Action that writes JSON directly to the HTTP response should end with return NONE to explicitly tell Struts that the response is already handled and no further result processing is needed.
 
 ### Current Behavior
 
-[What actually happens?]
+20 out of 27 return null statements in Flowsheet2Action were sitting right after a JSON write to the response. This means Struts was not being explicitly told the response was already handled, leaving room for unintended result resolution.
 
 ### Affected Components
 
-[Which parts of the codebase are involved?]
+The only file directly affected is src/main/java/io/github/carlos_emr/carlos/flowsheet/Flowsheet2Action.java. The new test class src/test/java/io/github/carlos_emr/carlos/flowsheet/Flowsheet2ActionTest.java was also added as part of the fix.
 
 ---
 
@@ -37,19 +37,19 @@ I picked this issue because I get to work on the real backend code of a medical 
 
 ### Environment Setup
 
-[Notes on setting up your local development environment - challenges you faced, how you solved them]
+I set up the development environment using Docker Desktop and VS Code with the Dev Containers extension on Windows. The biggest challenge was enabling WSL integration in Docker Desktop, since without it the container could not find the Docker daemon. Once that was enabled under Settings, Resources, and WSL Integration, everything connected properly. I also had to run git config --global --add safe.directory /workspace inside the container because Git flagged an ownership mismatch that was blocking the build.
 
 ### Steps to Reproduce
 
-1. [Step 1]
-2. [Step 2]
-3. [Observed result]
+1. Open Flowsheet2Action.java and search for return null.
+2. Look at the lines right before each occurrence and check if the method wrote JSON to the response using writeJsonResponse() or objectMapper.writeValue().
+3. You will find 20 places where the method writes JSON and then returns null instead of NONE, which goes against the project convention in CLAUDE.md.
 
 ### Reproduction Evidence
 
-- **Commit showing reproduction:** [Link to commit in your fork]
-- **Screenshots/logs:** [If applicable]
-- **My findings:** [What you discovered during reproduction]
+- **Commit showing reproduction:** https://github.com/alphin-08/carlos/commit/3cefe624cf1cce0ee9b9351c0e974608a910d103 
+- **Screenshots/logs:** Not applicable since this is a code convention issue and not a visible crash.
+- **My findings:** A full audit of all 27 return null statements confirmed that 20 of them follow a direct JSON write and should return NONE. The remaining 7 were left unchanged because 4 are private helper methods where null means "not found" and has nothing to do with Struts, and 3 are action methods that do not write anything to the response.
 
 ---
 
