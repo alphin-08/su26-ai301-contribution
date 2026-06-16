@@ -3,7 +3,7 @@
 **Contribution Number:** 1  
 **Student:** Alphin Shajan  
 **Issue:** https://github.com/carlos-emr/carlos/issues/2885 
-**Status:** Phase I
+**Status:** Phase 3
 
 ---
 
@@ -57,30 +57,36 @@ I set up the development environment using Docker Desktop and VS Code with the D
 
 ### Analysis
 
-[Your analysis of the root cause - what's causing the issue?]
+The root cause was that Flowsheet2Action was written before the project adopted the explicit return NONE convention for direct-response actions. The methods were functional but did not follow the current guidance in CLAUDE.md, which says that any action writing directly to the response must end with return NONE so Struts knows not to attempt any further result resolution.
 
 ### Proposed Solution
 
-[High-level description of your fix approach]
+The fix was to audit every return null in the file, identify which ones follow a direct JSON write, and change only those to return NONE. The ones that are private helpers or non-writing action methods were left unchanged to keep the PR focused.
 
 ### Implementation Plan
 
 Using UMPIRE framework (adapted):
 
-**Understand:** [Restate the problem]
+**Understand:** 
+Flowsheet2Action had 27 return null statements and 20 of them came right after writing JSON to the HTTP response, which violates the project convention in CLAUDE.md.
 
-**Match:** [What similar patterns/solutions exist in the codebase?]
+**Match:**
+The pattern of using return NONE after writing directly to the response is already established across other action classes in the project. This fix brings Flowsheet2Action in line with that same convention.
 
-**Plan:** [Step-by-step implementation plan]
-1. [Modify file X to do Y]
-2. [Add function Z]
-3. [Update tests]
+**Plan:** 
+1. Audit all 27 return null statements in Flowsheet2Action.java and categorize each one as either a direct-response branch or a non-writing branch.
+2. Change the 20 direct-response branches from return null to return NONE.
+3. Leave the 7 remaining occurrences unchanged, 4 private helpers where null means "not found" and 3 action methods that do not write to the response.
+4. Add Flowsheet2ActionTest.java with regression tests covering representative direct-response paths.
 
-**Implement:** [Link to your branch/commits as you work]
+**Implement:** 
+https://github.com/alphin-08/carlos/commit/3cefe624cf1cce0ee9b9351c0e974608a910d103
 
-**Review:** [Self-review checklist - does it follow the project's contribution guidelines?]
+**Review:**
+The change follows the convention in CLAUDE.md, stays within the scope of the issue, includes a signed off commit, targets the develop branch, and adds regression tests as required by the acceptance criteria.
 
-**Evaluate:** [How will you verify it works?]
+**Evaluate:**
+The fix was verified by running mvn test -Dtest=Flowsheet2ActionTest. All 3 tests passed with 0 failures and the build completed with BUILD SUCCESS.
 
 ---
 
