@@ -147,16 +147,15 @@ The pull request was accepted and merged into the develop branch. This was my fi
 
 ### Technical Skills Gained
 
-[What you learned technically]
+I got much more comfortable working in a Docker dev container. I learned how to connect Windows WSL with Docker Desktop and configure it properly. I also gained real experience seeing how big Java projects are built using Spring, Struts, and Maven. I finally understood how Struts processes results and why returning NONE is important. For testing, I learned how to write unit tests to check HTTP responses and verify the output. I also practiced the whole open source process from branching my code to getting a pull request merged.
 
 ### Challenges Overcome
 
-[What was hard and how you solved it]
+My biggest challenge was just getting the setup to work. I had to fix Docker connection issues, Git errors, and VS Code crashing before I even wrote any code. I had to really figure out what was broken instead of just restarting my computer. Once the setup was done, the hardest part was knowing which null returns to change. I could not just replace all of them. I had to read every method carefully and explain my choices so the reviewers understood my logic.
 
 ### What I'd Do Differently Next Time
 
-[Reflection on your process]
-
+Next time, I will set up my environment before picking an issue so I do not waste time. I will also remember to sign my commits from the start instead of fixing them later. Overall, the process went really well and I feel much more confident for my next task. 
 ---
 
 ## Resources Used
