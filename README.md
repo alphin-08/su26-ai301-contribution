@@ -94,18 +94,17 @@ The fix was verified by running mvn test -Dtest=Flowsheet2ActionTest. All 3 test
 
 ### Unit Tests
 
-- [ ] Test case 1: [Description]
-- [ ] Test case 2: [Description]
-- [ ] Test case 3: [Description]
+- [ ] Test case 1: list() returns NONE and writes JSON with the correct content type when called as a direct-response path.
+- [ ] Test case 2: getValidations() returns NONE and writes JSON with the correct content type when called as a simple read path.
+- [ ] Test case 3: removeItem() returns NONE and writes JSON with the correct content type when called as a mutator-style response path.
 
 ### Integration Tests
 
-- [ ] Integration scenario 1
-- [ ] Integration scenario 2
+I didn't need to write any integration tests for this update. The fix was really just about adjusting how return values are formatted in the code. It doesn't touch the database or change how different parts of the app talk to each other.
 
 ### Manual Testing
 
-[What you tested manually and results]
+Since this was just fixing code style and not an actual glitch you'd see on the screen, I didn't need to manually click around and test it in the browser. I know everything works correctly because all the unit tests passed and the whole project compiled perfectly with a clean BUILD SUCCESS.
 
 ---
 
