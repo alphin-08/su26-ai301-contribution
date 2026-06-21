@@ -161,6 +161,4 @@ The pull request was accepted and merged into the develop branch. This was my fi
 
 ## Resources Used
 
-- [Link to helpful documentation]
-- [Tutorial or Stack Overflow post that helped]
-- [GitHub issues or discussions that helped]
+- Link to helpful documentation: https://github.com/carlos-emr/carlos/blob/develop/CONTRIBUTING.md, https://github.com/carlos-emr/carlos/blob/develop/CLAUDE.md, https://github.com/carlos-emr/carlos/blob/develop/.devcontainer/README.md
