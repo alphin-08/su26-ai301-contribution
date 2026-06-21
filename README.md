@@ -110,33 +110,36 @@ Since this was just fixing code style and not an actual glitch you'd see on the 
 
 ## Implementation Notes
 
-### Week [X] Progress
+### Week [1] Progress
 
-[What you built this week, challenges faced, decisions made]
+This was the first issue I worked on as a new contributor so most of the week was spent getting the development environment working. The main challenges were enabling WSL integration in Docker Desktop, fixing a Git ownership mismatch inside the container with git config --global --add safe.directory /workspace, and dealing with VS Code disconnecting from the container during heavy operations like builds and tests. I fixed the disconnects by disabling Resource Saver mode in Docker Desktop and creating a .wslconfig file to give WSL more memory and CPU.
 
-### Week [Y] Progress
+### Week [2] Progress
 
-[Continue documenting as you work]
+Once the environment was stable I picked up issue 2885 and used Claude Code to audit all 27 return null statements in Flowsheet2Action.java. I categorized each one and made the 20 targeted changes from return null to return NONE in the direct-response branches. I also wrote the regression tests in Flowsheet2ActionTest.java covering three representative paths. The build passed and all 3 tests came back green. After that I committed the changes with a DCO sign off and opened the pull request targeting the develop branch on the original repo.
+
+### Week [3] Progress
+
+The pull request was accepted and merged into the develop branch. This was my first open source contribution getting merged into a real project. I also spent a lot of time writing documentation for this file. I am currently looking through the open issues to find my next task. I am trying to pick something that is a manageable size and fits what I already know about the code.
 
 ### Code Changes
 
-- **Files modified:** [List]
-- **Key commits:** [Links to important commits]
-- **Approach decisions:** [Why you chose certain approaches]
+- **Files modified:** src/main/java/io/github/carlos_emr/carlos/flowsheet/Flowsheet2Action.java, src/test/java/io/github/carlos_emr/carlos/flowsheet/Flowsheet2ActionTest.java
+- **Key commits:** https://github.com/alphin-08/carlos/commit/3cefe624cf1cce0ee9b9351c0e974608a910d103 
+- **Approach decisions:** I only changed the return null statements that came directly after a JSON write to the response. The other 7 were left unchanged on purpose. Four of them are private helper methods where null means "not found" and is a real return value, not a Struts result. The other three are addMeasurement, addPrevention, and reload, which do not write anything to the response so they fall outside the scope of this issue. I mentioned this in the PR description so the reviewers knew it was on purpose and not a mistake.
 
 ---
 
 ## Pull Request
 
-**PR Link:** [GitHub PR URL when submitted]
+**PR Link:** https://github.com/carlos-emr/carlos/pull/2914
 
-**PR Description:** [Draft or final PR description - much of the content above can be adapted]
+**PR Description:** The Flowsheet2Action file had methods that write JSON directly to the response and then return null. According to the CLAUDE.md file, these should return NONE instead. This stops the Struts framework from doing extra work after the response is already finished. This update changes 20 places to return NONE instead of null. I also added a test file called Flowsheet2ActionTest to check three of the main paths. I left the other seven null returns alone on purpose. Four of them are private helper methods, and three do not write anything to the response.
 
 **Maintainer Feedback:**
-- [Date]: [Summary of feedback received]
-- [Date]: [How you addressed it]
+- [06/17/2026]: No further feedback was given but the PR got approved and merged. 
 
-**Status:** [Awaiting review / Iterating / Approved / Merged]
+**Status:** Merged
 
 ---
 
